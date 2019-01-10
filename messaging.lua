@@ -1,3 +1,5 @@
+require "configuration"
+
 function connect_mqtt(callback)
 
     -- Start a watchdog timer to reset if no response from server in 100s
@@ -30,7 +32,7 @@ function connect_mqtt(callback)
     net.dns.setdnsserver("1.1.1.1", 0)
     net.dns.setdnsserver("8.8.8.8", 1)
     print("Looking up the MQTT broker in DNS")
-    net.dns.resolve("mqtt.svc.cave.avaruuskerho.fi", function(sk, ip)
+    net.dns.resolve(CONF_MQTT, function(sk, ip)
         if (ip == nil)
         then
             print("DNS resolution error")
