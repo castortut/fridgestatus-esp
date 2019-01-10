@@ -41,6 +41,7 @@ function connect_mqtt(callback)
 
         m:connect(ip, 1883, 0, function(client)
             print("MQTT Connection succesful")
+            client:publish("/iot/cave/hello/" .. node.chipid(), "Hello, I'm a motion sensor", 0, 0, function(client) print("sent") end)
             client:subscribe("/keepalive", 0, function(client) print("Subscribed to keepalives") end)
             callback(client)
         end)
