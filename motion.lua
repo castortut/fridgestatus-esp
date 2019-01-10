@@ -1,6 +1,6 @@
 function motion(client)
 
-    local IO_PIN = 7
+    local IO_PIN = 1
 
     gpio.mode(IO_PIN, gpio.INPUT)
 
@@ -12,7 +12,7 @@ function motion(client)
         if(last_state == 0 and new_state == 1)
         then
             print("Motion detected")
-            client:publish("/iot/cave/motion0/" .. node.chipid(), "detected", 0, 0, function(client) print("sent") end)
+            client:publish("/iot/cave/motion0/" .. node.chipid(), "Motion detected", 0, 0, function(client) print("sent") end)
         end
         last_state = new_state
     end)
